@@ -42,7 +42,7 @@ export default function HouseScreen({ navigation }) {
           <Text style={styles.production}>{item.buildingType}</Text>
           <Text style={styles.genres}>{item.location}</Text>
           <Text style={styles.rating}>Area: {item.buildingArea}</Text>
-          <Text style={styles.rating}>Price: {item.buildingPrice}</Text>
+          <Text style={styles.rating}>Price: {item.price}</Text>
         </View>
         <MaterialIcons name="chevron-right" size={24} color="#999" />
       </View>
