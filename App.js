@@ -1,20 +1,52 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { MaterialIcons } from '@expo/vector-icons';
 
-export default function App() {
+import HomeScreen from './screen/HomeScreen';
+import ApartScreen from './screen/ApartScreen';
+import HouseScreen from './screen/HouseScreen';
+import DetailScreen from './screen/DetailScreen';
+
+const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
+
+function MainTabs() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName;
+          if (route.name === 'Home') {
+            iconName = 'Home';
+          } else if (route.name === 'Apart') {
+            iconName = 'Apartment';
+          } else if (route.name === 'House') {
+            iconName = 'house';
+          }
+          return <MaterialIcons name={iconName} size={size} color={color} />;
+        },
+        tabBarActiveTintColor: '#007AFF',
+        tabBarInactiveTintColor: 'gray',
+        headerStyle: { backgroundColor: '#007AFF' },
+        headerTintColor: '#fff',
+      })}
+    >
+      <Tab.Screen name="Home" component={HomeScreen} options={{ title: 'All Buildings' }} />
+      <Tab.Screen name="Apart" component={ApartScreen} options={{ title: 'Apartments' }} />
+      <Tab.Screen name="House" component={HouseScreen} options={{ title: 'Houses' }} />
+    </Tab.Navigator>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="MainTabs" component={MainTabs} options={{ headerShown: false }} />
+        <Stack.Screen name="Detail" component={DetailScreen} options={{ title: 'Building Detail' }} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
