@@ -15,7 +15,7 @@ export default function DetailScreen({ route, navigation }) {
   const [buildingType, setBuildingType] = useState(building?.buildingType || '');
   const [location, setLocation] = useState(building?.location || '');
   const [buildingArea, setBuildingArea] = useState(building?.buildingArea?.toString() || '');
-  const [price, setBuildingPrice] = useState(building?.price || '');
+  const [price, setPrice] = useState(building?.price || '');
   const [loading, setLoading] = useState(false);
 
   const handleSave = async () => {
@@ -170,7 +170,7 @@ export default function DetailScreen({ route, navigation }) {
         <TextInput
           style={styles.input}
           value={price}
-          onChangeText={setBuildingPrice}
+          onChangeText={setPrice}
           placeholder="Masukkan harga building"
           keyboardType="numeric"
         />
